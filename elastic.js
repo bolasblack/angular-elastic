@@ -86,6 +86,8 @@ angular.module('monospaced.elastic', [])
                            'line-height',
                            'text-transform',
                            'word-spacing',
+                           'word-wrap',
+                           'word-break',
                            'text-indent'];
 
           // exit if elastic already applied (or is the mirror element)
