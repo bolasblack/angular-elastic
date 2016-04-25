@@ -24,14 +24,13 @@ angular.module('monospaced.elastic', [])
       var mirrorStore = {};
 
       return {
-        require: 'ngModel',
         restrict: 'A, C',
-        link: function(scope, element, attrs, ngModel) {
+        link: function(scope, element, attrs) {
           var group = attrs.msdElasticGroup, result, $mirror, destroy, forceAdjust;
 
           element.on('focus', function() {
             if (!result) {
-              result = init(scope, element, attrs, ngModel, mirrorStore[group], group);
+              result = init(scope, element, attrs, mirrorStore[group], group);
               $mirror = mirrorStore[group] = result.$mirror;
               destroy = result.destroy;
               forceAdjust = result.forceAdjust;
@@ -47,7 +46,7 @@ angular.module('monospaced.elastic', [])
         }
       };
 
-      function init(scope, element, attrs, ngModel, storedMirror, groupName) {
+      function init(scope, element, attrs, storedMirror, groupName) {
         // cache a reference to the DOM element
         var ta = element[0],
             $ta = element;
@@ -243,7 +242,7 @@ angular.module('monospaced.elastic', [])
         $win.bind('resize', forceAdjust);
 
         var valueUnwatcher = scope.$watch(function() {
-          return ngModel.$modelValue;
+          return element.val()
         }, function(newValue) {
           forceAdjust();
         });
